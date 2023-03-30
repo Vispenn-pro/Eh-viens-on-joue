@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:evoj/utils/my_drawer.dart';
 
-import '../../utils/cats/random_cats_logo.dart';
 import '../../utils/cats/query_results.dart';
 import '../../utils/cats/random_button.dart';
 
@@ -16,6 +15,10 @@ class CatsPage extends StatefulWidget {
 
 class _CatsPageState extends State<CatsPage> {
 
+  bool _pinned = true;
+  bool _snap = false;
+  bool _floating = false;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -23,34 +26,37 @@ class _CatsPageState extends State<CatsPage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const MyDrawer(),
-      body: Stack(
-        children: [
-          IconButton(
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-            icon: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.transparent,
+            pinned: _pinned,
+            snap: _snap,
+            floating: _floating,
+            expandedHeight: 120,
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text("Random cats", style: TextStyle(fontSize: 24)),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * (15 / 100),
-                  child: const Logo()
-              ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * (65 / 100),
-                  child: const QueryResult()
-              ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * (15 / 100),
-                  child: const SearchBar()
-              ),
-            ],
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index){
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * (70 / 100),
+                        child: const QueryResult()
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * (10 / 100),
+                        child: const RandomButton()
+                    ),
+                  ],
+                );
+              },
+              childCount: 1
+            ),
           ),
         ],
       )

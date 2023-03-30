@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
           brightness: Brightness.dark,
           scaffoldBackgroundColor: Colors.black87,
-
         ),
         darkTheme: ThemeData.dark(),
         home: const HomePage(),
@@ -41,14 +40,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  double firstPartSize = 45;
-  double secondPartSize = 55;
-  bool isVisible = true;
-  Alignment alignment = Alignment.center;
   late Future<FactEntity> randomFact = getRandomFact();
   late Future<CatEntity> randomCat = getRandomCat();
-
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   void search(){
     randomFact = getRandomFact();

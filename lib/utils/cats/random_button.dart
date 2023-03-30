@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 
 import '../../main.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+class RandomButton extends StatefulWidget {
+  const RandomButton({Key? key}) : super(key: key);
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<RandomButton> createState() => _RandomButtonState();
 }
 
-class _SearchBarState extends State<SearchBar>{
+class _RandomButtonState extends State<RandomButton>{
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<MyAppState>();

@@ -12,6 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  bool _pinned = true;
+  bool _snap = false;
+  bool _floating = false;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -19,21 +24,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const MyDrawer(),
-      body: Stack(
-        children: [
-          IconButton(
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-            icon: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.transparent,
+            pinned: _pinned,
+            snap: _snap,
+            floating: _floating,
+            expandedHeight: 120,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index){
+                return const Center(
+                  child: MyLogo(height: 194, width: 194, fontSize: 32,),
+                );
+              },
+              childCount: 1
             ),
           ),
-          const Center(
-            child: MyLogo(height: 194, width: 194, fontSize: 32,),
-          )
         ],
       ),
     );

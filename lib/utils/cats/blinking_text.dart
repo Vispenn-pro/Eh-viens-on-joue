@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../main.dart';
 
 class BlinkingText extends StatefulWidget {
   final String _target;
@@ -36,6 +33,6 @@ class _BlinkingTextState extends State<BlinkingText> {
   @override
   Widget build(BuildContext context) => Text(widget._target,
   style: _show
-  ? const TextStyle(fontSize: 64)
-      : const TextStyle(fontSize: 64, color: Colors.transparent));
+  ? const TextStyle(fontSize: 32)
+      : const TextStyle(fontSize: 32, color: Colors.transparent));
 }
